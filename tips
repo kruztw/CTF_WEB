@@ -1,0 +1,9 @@
+############### curl -A useragent url #################
+
+curl -A "Googlebot" http://web5.tamuctf.com/robots.txt
+
+############### html entity encode/decode #############
+&lpar = (
+# https://mothereff.in/html-entities
+
+###############

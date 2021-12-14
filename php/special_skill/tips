@@ -1,0 +1,14 @@
+# 內容會自動串起來
+file_put_contents("filename", ["<?php ", "phpinfo()"]);
+
+# 不在意大小寫
+SysTeM("ls");
+
+# 變數可當函式用
+$a="system"; $a("ls");
+
+# 自動變字串
+system(ls)
+
+# 會執行 ls, 但 echo $(ls); 不行
+echo `ls`;

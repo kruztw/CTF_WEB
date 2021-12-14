@@ -1,0 +1,32 @@
+######################### site 指定網域 ###################
+
+site:edu.tw admin
+
+######################### ext 指定副檔名 ##################
+
+ext: sql passwd	
+
+######################### inurl 指定 url 的字串 ###########
+
+inurl: .git
+
+######################## intitle 指定網頁標題字串 #########
+
+intitle: .git
+
+######################## intext 指定網頁包含的字串 ########
+
+intext: passwd
+
+####################### filetype 指定檔案類型
+
+intel filetype:pdf
+
+####################### cache 搜尋網頁在 google 中的暫存資料
+
+(不知道能幹麻 ... )
+
+######################## 敏感資源可用 AND 串起來一次搜尋
+
+"Parent Directory" AND "Index of" AND "config.php_old" AND ".env.bak"
+

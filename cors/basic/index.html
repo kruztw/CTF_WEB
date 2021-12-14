@@ -1,0 +1,14 @@
+<html>
+
+<script>
+    //fetch('http://localhost:8787/').then(data => console.log(data)).catch(err => console.error(err));
+    xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        console.log(xhr.responseText);
+    }
+//    xhr.withCredentials = true;
+    xhr.open("GET","http://localhost:8787/",true);
+    xhr.send();
+</script>
+
+</html>

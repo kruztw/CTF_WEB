@@ -1,0 +1,17 @@
+cache 是用 Django 框架寫的
+
+運行方式: python3 manage.py runserver
+
+攻擊: python3 exp.py
+
+漏洞:
+在 settings.py 有設定 MIDDLEWARE, 
+因此所有呼叫都會先經過 cache_middleware.py 的 __call__ 處理,
+__call__ 會將呼叫頁面保存在 CACHE,
+若 10s 內再次呼叫, 會直接從 CACHE 回傳
+
+urls.py 紀錄路由,
+從 flag 可以看出要取得 flag 必須要帶 cookie: token => admin token
+
+因此先發送帶有 admin token 的請求,
+這將導致 10s 內發送即便不具 admin token 的請求一樣會拿到 flag

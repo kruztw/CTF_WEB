@@ -1,0 +1,9 @@
+URI: a.fuckyou
+Content-type: shit
+Body:--- whatever ----
+<html>
+<body>
+<script>alert(120)</script>
+</body>
+</html>
+--- whatever ----

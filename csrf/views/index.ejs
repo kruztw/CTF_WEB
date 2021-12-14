@@ -1,0 +1,17 @@
+<html>
+
+<head>
+</head>
+
+<body>
+    <form action="/" method=post>
+        <p> xss me :</p>
+	    <textarea required rows="12" cols="300" name="comment"></textarea>
+        <button type = "submit">Post</button>
+    </form>
+    <% if (comment) { %>
+    <%- comment %>
+    <% } %>
+</body>
+
+</html>

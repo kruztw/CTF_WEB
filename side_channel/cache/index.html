@@ -1,0 +1,27 @@
+<!-- writeup: https://fireshellsecurity.team/uiuctf2021-yana/ -->
+
+<html lang="en">
+
+    <div id="output">
+    <!-- 
+    註解掉這行會導致下面 <script> 在 load img_url 時會 load 很久, 測試前先將 chrome 的 cache 刪掉 (ctrl+H -> Clear Brosing Data -> cached images and files)
+    開啟網頁後按 click, 到 console 視窗看時間
+
+    <img src="https://miro.medium.com/max/1352/1*XEgA1TTwXa5AvAdw40GFow.png"></img>
+    -->
+    </div>
+
+    <button onclick="load()">click me</button>
+
+    <script>
+        function load() {
+            var img_url = "https://miro.medium.com/max/1352/1*XEgA1TTwXa5AvAdw40GFow.png";
+            var start = window.performance.now();
+            fetch(img_url, {'mode': 'no-cors', 'cache': 'force-cache'}).then(response => {
+                        var end = window.performance.now();
+                        var timing = end - start;
+                        console.log("laod time: ", timing);
+            });
+        }
+    </script>
+</html>

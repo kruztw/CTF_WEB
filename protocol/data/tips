@@ -1,0 +1,4 @@
+####################### file_get_contents($text) === "abc" ########
+
+?text=data://text/plain;abc
+?text=data://text/plain;base64,<"abc" 的 base64, 記得用跟題目一樣的語言>
